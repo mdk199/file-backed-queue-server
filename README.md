@@ -18,10 +18,10 @@
 
 **Link to Swagger:** http://localhost:3456/swagger-ui.html
 
-* POST /queue/enqueue
+* POST /queue/<queueName>/enqueue
    * Use this method to enqueue an element on queue server
    * Data can be passed as a message body
-* GET /queue/dequeue
+* GET /queue/<queueName>/dequeue
    * Use this method to dequeue an element from queue server
 
 ## How to start queue server on Local Machine

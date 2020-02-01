@@ -17,12 +17,12 @@ public class QueueController {
     this.queueManagerService = queueManagerService;
   }
 
-  @RequestMapping(method = RequestMethod.POST, path = "enqueue/{queueName}")
+  @RequestMapping(method = RequestMethod.POST, path = "/{queueName}/enqueue")
   public void enqueue(@RequestBody String entry, @PathVariable("queueName") String queueName) {
     queueManagerService.enqueue(entry, queueName);
   }
 
-  @RequestMapping(method = RequestMethod.GET, path = "dequeue/{queueName}")
+  @RequestMapping(method = RequestMethod.GET, path = "/{queueName}/dequeue")
   public String dequeue(@PathVariable("queueName") String queueName) {
     return queueManagerService.dequeue(queueName);
   }

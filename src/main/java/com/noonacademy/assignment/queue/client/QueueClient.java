@@ -50,7 +50,7 @@ public class QueueClient {
 
   protected void enqueue(String queueName, String entry) throws EnqueueOperationFailed {
 
-    String enqueueApiUrl = this.queueServerBaseUrl + "/queue/enqueue/" + queueName;
+    String enqueueApiUrl = this.queueServerBaseUrl + "/queue/" + queueName + "/enqueue";
 
     try {
       ResponseEntity<String> entity = restTemplate
@@ -119,7 +119,8 @@ public class QueueClient {
 
   private String dequeue(String queueName) {
 
-    String dequeueApiUrl = this.queueServerBaseUrl + "/queue/dequeue/" + queueName;
+    String dequeueApiUrl =
+        this.queueServerBaseUrl + "/queue/" + queueName + "/dequeue/";
 
     try {
       ResponseEntity<String> entity = restTemplate.getForEntity(dequeueApiUrl, String.class);
