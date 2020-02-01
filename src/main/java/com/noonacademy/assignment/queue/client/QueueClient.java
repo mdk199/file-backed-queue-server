@@ -120,7 +120,7 @@ public class QueueClient {
   private String dequeue(String queueName) {
 
     String dequeueApiUrl =
-        this.queueServerBaseUrl + "/queue/" + queueName + "/dequeue/";
+        this.queueServerBaseUrl + "/queue/" + queueName + "/dequeue";
 
     try {
       ResponseEntity<String> entity = restTemplate.getForEntity(dequeueApiUrl, String.class);
