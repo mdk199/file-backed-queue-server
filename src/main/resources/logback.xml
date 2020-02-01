@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="LOG_LOCATION" value="c:/users/${user.name}/logs/" />
+    <property name="LOG_LOCATION" value="/users/${user.name}/logs/" />
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
