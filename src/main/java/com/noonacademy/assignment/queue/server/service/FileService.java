@@ -7,7 +7,7 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Service;
 
 @Service
-public class FilePersistenceService {
+public class FileService {
 
   public void saveEntryToFile(String filePath, String entity) throws IOException {
     FileUtils.write(new File(filePath), entity, Charsets.UTF_8);

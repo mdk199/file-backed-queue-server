@@ -15,24 +15,24 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
-public class QueueManagerService {
+public class QueueService {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(QueueManagerService.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(QueueService.class);
 
   private final String queuePersistenceDirectory;
 
   private final Integer queueUpperCapacityLimitAlert;
 
-  private final FilePersistenceService filePersistenceService;
+  private final FileService fileService;
 
   private Map<String, QueueIndex> queueStart;
 
-  public QueueManagerService(
+  public QueueService(
       @Value("${queue.persistence.directory}") String queuePersistenceDirectory,
       @Value("${queue.upper.capacity.limit.alert}") Integer queueUpperCapacityLimitAlert,
-      FilePersistenceService filePersistenceService) {
+      FileService fileService) {
     this.queuePersistenceDirectory = queuePersistenceDirectory;
-    this.filePersistenceService = filePersistenceService;
+    this.fileService = fileService;
     this.queueUpperCapacityLimitAlert = queueUpperCapacityLimitAlert;
     this.queueStart = new ConcurrentHashMap<>();
   }
@@ -80,7 +80,7 @@ public class QueueManagerService {
       }
       String entryFileName = queueDir + "/" + endIndex;
 
-      filePersistenceService.saveEntryToFile(entryFileName, entry);
+      fileService.saveEntryToFile(entryFileName, entry);
     } catch (IOException e) {
       LOGGER.error("Failed to persist entry at index: " + endIndex, e);
       throw new RuntimeException("Failed to persist entry");
@@ -107,7 +107,7 @@ public class QueueManagerService {
         .append(startIndex).toString();
     String entry;
     try {
-      entry = filePersistenceService.readEntryAndDeleteFile(entryFileName);
+      entry = fileService.readEntryAndDeleteFile(entryFileName);
       queueIndex.setStartIndex(++startIndex);
     } catch (IOException e) {
       LOGGER.error("Failed to read entry from index: " + startIndex, e);
